@@ -5,7 +5,7 @@
   Once the child completes its execution the parent should fork again. This time the new child 
   should execute the "pwd" shell command. The parent process ends by displaying "Main thread exits" 
   message to the screen.*/
-
+/*
   #include <stdio.h>
   #include <stdlib.h>
   #include <unistd.h>
@@ -30,6 +30,87 @@
         for(int i=0; i<=n; i++){
         fprintf("Hello World\n");
         }
+    } 
+  }*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main() {
+    int n;
+    printf("Enter a value for 'n': ");
+    scanf("%d", &n);
+
+    // Create the child process
+    pid_t child_pid = fork();
+
+    if (child_pid < 0) {
+        perror("Fork failed");
+        exit(1);
     }
-    
-  }
+
+    if (child_pid == 0) {
+        // Child process
+        printf("Child process (PID %d) calculates the sum of the first %d natural numbers.\n", getpid(), n);
+
+        int sum = 0;
+        for (int i = 1; i <= n; i++) {
+            sum += i;
+        }
+
+        printf("Sum of the first %d natural numbers is: %d\n", n, sum);
+
+        // Create a new child process to execute "pwd" command
+        pid_t pwd_child_pid = fork();
+
+        if (pwd_child_pid < 0) {
+            perror("Fork for pwd failed");
+            exit(1);
+        }
+
+        if (pwd_child_pid == 0) {
+            // This is the new child process
+            printf("Child process (PID %d) executes 'pwd' command:\n", getpid());
+            execlp("pwd", "pwd", NULL);
+
+            // If exec fails, print an error
+            perror("exec");
+            exit(1);
+        }
+
+        // Wait for the "pwd" child process to complete
+        int status;
+        waitpid(pwd_child_pid, &status, 0);
+
+        printf("Child process (PID %d) has executed 'pwd' and exited.\n", getpid());
+    } else {
+        // Parent process
+        printf("Parent process (PID %d) displays 'Hello world' %d times and writes to the output file.\n", getpid(), n);
+
+        // Create and open the output file
+        FILE *output_file = fopen("output.txt", "w");
+        if (output_file == NULL) {
+            perror("Error opening output file");
+            exit(1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            printf("Hello world\n");
+            fprintf(output_file, "Hello world\n");
+        }
+
+        fclose(output_file);
+
+        // Wait for the child process to complete
+        int status;
+        waitpid(child_pid, &status, 0);
+
+        printf("Parent process (PID %d) has completed.\n");
+    }
+
+    printf("Main thread exits.\n");
+    return 0;
+}
