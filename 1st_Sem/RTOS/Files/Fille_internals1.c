@@ -5,33 +5,6 @@
   Once the child completes its execution the parent should fork again. This time the new child 
   should execute the "pwd" shell command. The parent process ends by displaying "Main thread exits" 
   message to the screen.*/
-/*
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include <unistd.h>
-  #include <sys/wait.h>
-
-  int main()
-  {
-    printf("Enter the value of n");
-    scanf("%d",&n);
-    int id = fork();
-    if(id < 0){
-        printf("Error");
-        exit(1);
-    }
-    //if(id==0){printf}
-    if(id==0){ //child 
-        for(int i=0; i<=n; i++){
-        printf("Hello World\n");
-        }
-        FILE *fp1;
-        fp1 = fopen("a.txt" ,w );
-        for(int i=0; i<=n; i++){
-        fprintf("Hello World\n");
-        }
-    } 
-  }*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +17,7 @@ int main() {
     printf("Enter a value for 'n': ");
     scanf("%d", &n);
 
-    // Create the child process
+    // Create the child process , first fork
     pid_t child_pid = fork();
 
     if (child_pid < 0) {
@@ -64,9 +37,9 @@ int main() {
         printf("Sum of the first %d natural numbers is: %d\n", n, sum);
 
         // Create a new child process to execute "pwd" command
-        pid_t pwd_child_pid = fork();
+        pid_t pwd_child_pid = fork(); //second fork
 
-        if (pwd_child_pid < 0) {
+        if (pwd_child_pid < 0) { 
             perror("Fork for pwd failed");
             exit(1);
         }
@@ -74,7 +47,7 @@ int main() {
         if (pwd_child_pid == 0) {
             // This is the new child process
             printf("Child process (PID %d) executes 'pwd' command:\n", getpid());
-            execlp("pwd", "pwd", NULL);
+            execlp("pwd", "pwd", NULL); //https://www.javatpoint.com/execlp-function-in-c
 
             // If exec fails, print an error
             perror("exec");
@@ -100,6 +73,8 @@ int main() {
         for (int i = 0; i < n; i++) {
             printf("Hello world\n");
             fprintf(output_file, "Hello world\n");
+            /*The fprintf function works similarly to printf, but instead of writing to the standard output, 
+            it writes to the specified file*/
         }
 
         fclose(output_file);
