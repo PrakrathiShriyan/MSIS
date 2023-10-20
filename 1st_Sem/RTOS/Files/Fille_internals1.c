@@ -60,7 +60,7 @@ int main() {
 
         printf("Child process (PID %d) has executed 'pwd' and exited.\n", getpid());
     } else {
-        // Parent process
+        // Parent process , main parent
         printf("Parent process (PID %d) displays 'Hello world' %d times and writes to the output file.\n", getpid(), n);
 
         // Create and open the output file
@@ -77,7 +77,7 @@ int main() {
             it writes to the specified file*/
         }
 
-        fclose(output_file);
+        fclose(output_file);//close the file
 
         // Wait for the child process to complete
         int status;
