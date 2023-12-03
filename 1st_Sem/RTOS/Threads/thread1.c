@@ -11,6 +11,9 @@ Aso Publish the process id and thread-id in every thread*/
 #include <sys/syscall.h>
 #define LEN 5
 
+void* f1(void*);
+void* f2(void*);
+
 int main()
 {   int i;
   //  int arr1 = [12,34,44,5,98];
@@ -35,6 +38,29 @@ int main()
 }
 
 void *f1(void *arr1)
-    
-    return 0;
+{
+    int sum=0, i, num;
+    printf("Thread1: Process id is %d\n", getpid());
+    printf("Thread1: Thread id is %lu\n", pthread_self());
+    for(i=0; i<LEN; i++)
+    {
+        num=((int*)arr1)[i];
+        sum+=num;
+    }
+    printf("\nThread1: The sum of all elemnts of the array is %d\n",sum);
+}
+
+void *f2(void *arr1)
+{
+    int sum=0, i, num;
+    printf("Thread2: Process id is %d\n", getpid());
+    printf("Thread2: Thread id is %lu\n", pthread_self());
+    printf("\nThread2: Here are the odd numbers:\n");
+    for(int i=0; i<LEN; i++)
+    {
+        num=((int*) arr1)[i];
+        if((num%2)!=0)
+            printf("%d\t", num);
+    }
+    printf("\n");
 }
