@@ -1,3 +1,12 @@
+/*
+#if (USE_MUTEX == 1)
+pthread_mutex_lock(&file_mutex);
+// Critical section: access to the file or shared resource
+// ... (code that should be protected from concurrent access)
+pthread_mutex_unlock(&file_mutex);
+#endif
+*/
+
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
