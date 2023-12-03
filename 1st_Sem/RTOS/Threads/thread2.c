@@ -17,10 +17,17 @@ int main()
 
     printf("\n");
 
+//pthread_create(&t1, NULL, f1, arr1);
+//pthread_create() creates a new thread.
+//&t1 is a pointer to a pthread_t variable where the thread ID will be stored.
+//NULL specifies the default attributes for the new thread.
+//f1 is the function that the thread will execute.
+//arr1 is the argument passed to the thread function f1.
     pthread_create(&t1,&a,f1,NULL);
     pthread_create(&t2,&a,f2,NULL);
     pthread_create(&t3,&a,f3,NULL);
 
+//pthread_join() to create and manage threads in a multi-threaded environment using the pthreads library in 
     pthread_join(t1,NULL);
     pthread_join(t2,NULL);
     pthread_join(t3,NULL);
