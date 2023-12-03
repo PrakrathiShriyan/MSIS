@@ -1,33 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.c>
-#include <sys/types.c>
+#include <sys/wait.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <pthread.h>
 
+void* f1(void*);
+void* f2(void*);
+void* f3(void*);
+
+
 int main()
 {
-    pid_t t1, t2, t3;
+    pthread_t t1, t2, t3;
 
     pthread_attr_t p1;
     pthread_attr_t p2;
     pthread_attr_t p3;
 
-    pthread_attr_init
-    pthread_attr_init
-    pthread_attr_init
+    pthread_attr_init(&p1);
+    pthread_attr_init(&p2);
+    pthread_attr_init(&p3);
 
-    pthread_create();
-    pthread_create();
-    pthread_create();
+    pthread_create(&t1, NULL, f1, p1);
+    pthread_create(&t2, NULL, f2, p2);
+    pthread_create(&t3, NULL, f3, p3);
 
-    pthread_join();
-    pthread_join();
-    pthread_join();
-
-    void* f1(void*);
-    void* f2(void*);
-    void* f3(void*);
+    pthread_join(t1,NULL);
+    pthread_join(t2,NULL);
+    pthread_join(t3,NULL);
 
     return 0;
 }
