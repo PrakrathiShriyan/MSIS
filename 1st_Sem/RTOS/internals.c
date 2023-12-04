@@ -22,6 +22,9 @@ The third argument "-l" specifies an option to the ls command, which means "list
 The NULL argument signifies the end of the argument list.
 This command, when executed in a terminal, lists the files and directories in the current directory in a detailed, long format.
 */
+
+//putc(ch, fp);  // Writes to the file output.txt
+//Using putchar  putchar(ch);   // Writes to the console (stdout)
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
