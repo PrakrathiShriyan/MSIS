@@ -9,16 +9,16 @@
 //pthread_mutex_t is an variable datatype
 pthread_mutex_t myMutex = PTHREAD_MUTEX_INITIALIZER;
 
-void* f1(void* argv);
+void* f1(void*);
 void* f2(void*);
 
-int main(int argc, char* argv[1])
+int main(int argc, char* argv[])
 {
     pthread_t t1, t2;
 
 //  better keep attribute NULL
 
-    pthread_create(&t1, NULL, f1, NULL); //give the filename argument here
+    pthread_create(&t1, NULL, f1, argv[1]); //give the filename argument here
     pthread_create(&t2, NULL, f2, NULL);
 
     pthread_join(t1, NULL);
@@ -29,12 +29,12 @@ int main(int argc, char* argv[1])
 }
 
 //copy content from fp1 to fp2
-void* f1(void* argv[1])
+void* f1(void* arg)
 {
     FILE *fp1, *fp2;
     char ch;
     //take file fp1 as an argument in consol
-    fp1 = fopen(argv[1], "r");
+    fp1 = fopen(((char*)arg), "r");
     //create a new file fp2 called output.txt
     fp2 = fopen("output.txt","w");
 
