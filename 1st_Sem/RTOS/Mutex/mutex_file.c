@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#
 
 //pthread_mutex_t is an variable datatype
 pthread_mutex_t myMutex = PTHREAD_MUTEX_INITIALIZER;
@@ -11,7 +12,7 @@ pthread_mutex_t myMutex = PTHREAD_MUTEX_INITIALIZER;
 void* f1(void*);
 void* f2(void*);
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[1])
 {
     pthread_t t1, t2;
 
@@ -23,12 +24,12 @@ int main(int argc, char* argv[])
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
 
-    returrn 0;
+    return 0;
 
 }
 
 //copy content from fp1 to fp2
-void* f1(void* arg)
+void* f1(void* argv[1])
 {
     FILE *fp1, *fp2;
     char ch;
@@ -39,7 +40,7 @@ void* f1(void* arg)
 
     //put mutex lock for copying and pasting the contents
     pthread_mutex_lock(&myMutex);
-    while((ch = (getc(fp1)!=EOF);
+    while((ch = (getc(fp1)!=EOF));
         putc(ch,fp2);
     pthread_mutex_unlock(&myMutex);
 
