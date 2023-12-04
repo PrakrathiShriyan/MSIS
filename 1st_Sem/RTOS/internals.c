@@ -5,6 +5,23 @@ about files in the current directory.
 The third child reads from a file, converts uppercase characters to lowercase, counts alphabetic characters, digits,
 and newline characters, and then prints the modified text and counts.
 */
+/*execlp("pwd", "pwd", NULL)
+
+This command, when executed in a terminal, prints the current working directory to the standard output. 
+
+This function call executes the pwd command (print working directory) within the C program.
+The first argument "pwd" specifies the command or program to execute (pwd in this case).
+The second argument "pwd" is the name of the command that will be displayed in case of errors or while running the program.
+The NULL argument signifies the end of the argument list
+
+execlp("ls", "ls", "-l", NULL)
+This function call executes the ls -l command within the C program.
+The first argument "ls" specifies the command or program to execute (ls in this case).
+The second argument "ls" is the name of the command that will be displayed in case of errors or while running the program.
+The third argument "-l" specifies an option to the ls command, which means "list files in long format."
+The NULL argument signifies the end of the argument list.
+This command, when executed in a terminal, lists the files and directories in the current directory in a detailed, long format.
+*/
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
