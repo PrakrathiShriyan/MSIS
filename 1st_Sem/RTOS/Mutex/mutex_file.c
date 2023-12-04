@@ -4,12 +4,12 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#
+#include <fcntl.h>
 
 //pthread_mutex_t is an variable datatype
 pthread_mutex_t myMutex = PTHREAD_MUTEX_INITIALIZER;
 
-void* f1(void*);
+void* f1(void* argv);
 void* f2(void*);
 
 int main(int argc, char* argv[1])
@@ -18,7 +18,7 @@ int main(int argc, char* argv[1])
 
 //  better keep attribute NULL
 
-    pthread_create(&t1, NULL, f1, argv[]); //give the filename argument here
+    pthread_create(&t1, NULL, f1, NULL); //give the filename argument here
     pthread_create(&t2, NULL, f2, NULL);
 
     pthread_join(t1, NULL);
@@ -40,7 +40,7 @@ void* f1(void* argv[1])
 
     //put mutex lock for copying and pasting the contents
     pthread_mutex_lock(&myMutex);
-    while((ch = (getc(fp1)!=EOF));
+    while(ch = (getc(fp1)!=EOF))
         putc(ch,fp2);
     pthread_mutex_unlock(&myMutex);
 
@@ -67,13 +67,13 @@ void* f2(void* arg)
     FILE *fp;
     fp = fopen("output.txt","a");
     
-    pthread_mutex_lock(&myMutex)
+    pthread_mutex_lock(&myMutex);
 
     int count = 5;
 
     printf("Enter the string:\n");
 
-    fgetc(data, sizeof(data), stdin);
+    fgets(data, sizeof(data), stdin);
 
     //three parameters, 1-variable to store the data usually in an array
 //2-sizeof(variable)-maximum number of characters that can be read into data. sizeof(variable)
