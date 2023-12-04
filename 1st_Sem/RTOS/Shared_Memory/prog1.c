@@ -17,28 +17,80 @@ once again to the screen. Observe the output.*/
 
 int main()
 {
-    int seg_id;
-    char *shm;
-    char *shm1;
-    char ch='a';
-    const int len=100;
-    int low=32;
-    int id1, id2, data=0;
+int seg_id;
+char *sm;
+char *sm1;
+char ch='a';
+const int len=100; //declaring some adequate length
+int low=32;
+int id1,id2,data=0;
 
-    id1=fork();
-    if(id>0)
-    {
-        printf("I am first parent\n");
-        seg_id=shmget(IPC_PRIVATE, len, S_IRUSR | S_IWUSR);
-        sm=(char *)shmat(seg_id, NULL, 0);
-        sm1=(char *)shmat(seg_id, NULL, 0);
+id1=fork();
 
-        for(int i=0; i<=10; i++)
-        {
-            *(sm+i)=data;
-            data++;
-        }
-        
-        for(int i; i<=36)
-    }
+if(id1>0)
+{
+printf("iam the first parent\n");
+seg_id=shmget( IPC_PRIVATE, len, S_IRUSR | S_IWUSR ); //creating shared memeory segment, allocate memory
+sm=(char *) shmat(seg_id, NULL, 0); // attach
+sm1=(char *) shmat(seg_id, NULL, 0); // attach
+
+for(int i=0;i<=10;i++)
+{
+*(sm+i)=data; // value in data is being put in sm one by one
+data++;
+}
+
+for(int i=10;i<36;i++)
+{
+*(sm+i)=ch; // value in ch is being put in sm one by one
+ch++;
+}
+
+for(int i=0;i<10;i++)
+{
+printf("%d\t",*(sm+i));
+}
+printf("\n");
+
+for(int i=10;i<36;i++)
+{
+printf("%c\t",*(sm+i));// accessing same value and adding 32 to convert upper case to lower case
+}
+printf("\n");
+
+
+id2=fork();
+
+if(id2>0)
+{
+printf("iam the second parent\n");
+for(int i=0;i<10;i++)
+{
+*(sm+i)=*(sm+i)+100; //incrementing the value by 100
+}
+
+for(int i=10;i<36;i++)
+{
+*(sm+i)=*(sm+i)-32; //characters to upper case
+}
+}
+else if(id2==0) //child
+{
+printf("iam the second child\n");
+
+for(int i=0;i<10;i++)
+{
+printf("%d\t",*(sm+i));
+}
+printf("\n");
+
+for(int i=10;i<36;i++)
+{
+printf("%c\t",*(sm+i));// accessing same value and adding 32 to convert upper case to lower case
+}
+printf("\n");
+}
+}
+shmctl(seg_id,IPC_RMID,NULL); //deallocating the segment from the memory area
+return 0;
 }
