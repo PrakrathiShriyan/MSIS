@@ -1,0 +1,62 @@
+  299  cd home
+  300  cd create
+  301  gedit create
+  302  which bash
+  303  ls
+  304  cd home
+  305  cd Home
+  306  cd /
+  307  cd Home
+  308  gedit create
+  309  ls -l
+  310  create.sh
+  311  ls -l create.sh
+  312  chmod 7 7 7 create.sh
+  313  chmod 777 create.sh
+  314  ls
+  315  ls -l
+  316  chmod -x create.sh
+  317  ls -l
+  318  chmod 700 create.sh
+  319  ls -l
+  320  chmod 777 create.sh
+  321  ./create.sh
+  322  ls -l
+  323  whatis grep
+  329  grep 'bash' create.sh
+  332  grep -in 'bash' create.sh
+  333  grep -inov 'bash' create.sh
+  334  grep -in 'are' text.txt
+  335  grep -in 'in' text.txt
+  336  grep -i 'in' text.txt
+  337  history
+
+
+  grep -i 'in' text.txt
+  339  grep -io 'in' text.txt
+  340  grep -in 'in' text.txt
+  341  grep -iv 'in' text.txt
+  342  grep -v 'in' text.txt
+  343  grep -o 'in' text.txt
+  346  grep -io 'in' text.txt
+  347  grep -i 'in' text.txt
+  348  grep -o 'in' text.txt
+  349  grep -v 'in' text.txt
+  350  grep -n 'in' text.txt
+  351  grep -no 'in' text.txt
+  360  grep -o 'in' text.txt
+  361  grep -o 'in' text.txt|wc -l
+  368  grep -E 'etc|in' text.txt
+  373  grep -c 'etc' text.txt
+  374  grep -w 'pre' text.txt
+  375  grep 'pre' text.txt
+  376  grep -w 'pre' text.txt
+  378  grep -iR in /home
+  389  grep 'pre' text.txt
+  390  echo $?
+ 382  grep -f 'text2.txt' 'text.txt'
+
+
+check -f and -F
+//-w prints only independent word ex: preponed pre not printed, pre is printed when pre is present
+
