@@ -8,5 +8,5 @@ char upper_to_lower(char ch)
     if(ch >= 'A' && ch <= 'Z')
         return ch+32;
     else
-        return !;
+        return '!';
 }

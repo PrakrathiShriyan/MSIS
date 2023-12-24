@@ -1,7 +1,7 @@
 //upper to lower
 char upper_to_lower(char ch);
 //area of circle
-float area_of_circle(float radius);
+/*float area_of_circle(float radius);
 //celsius to fahrenheit
 float C_to_F(float celsius);
 //no of char btw two char eg: A and E => 3
@@ -30,4 +30,4 @@ unsigned int N_prime_number(unsigned int input);
 //A number is called an Armstrong number if the sum of the cubes of the digits of the
 // number is equal to the number. For example 153 = 1^3 + 5^3 + 3^3. Write a C
 // program that asks the user to enter a number and returns if it is Armstrong or not.
-unsigned int check_if_armstrong(unsigned int num);
+unsigned int check_if_armstrong(unsigned int num);*/
